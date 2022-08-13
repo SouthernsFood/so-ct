@@ -26,11 +26,12 @@ img {
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.social-media {
+  width: 2em;
+  height: 2em;
+}
 
 a, a:visited, a:focus, a:hover, a:active {
   color: #3a3f4a;
-  margin: 15px;
-  height: 150px;
-  width: auto;
+  margin: 2vw;
 }
