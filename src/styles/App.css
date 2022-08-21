@@ -1,0 +1,82 @@
+
+/*
+* {
+  border: solid 1px red;
+} */
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+}
+
+.App-logo {
+  height: 60vmin;
+}
+
+.nav-logo {
+  -webkit-filter: invert(100%);
+  /* safari 6.0 - 9.0 */
+  filter: invert(100%);
+}
+
+#home {
+  background-color: #1554e7;
+    color: #fff;
+    background-image: url('../imgs/southerns-truck-reflection.jpg');
+    background-size: cover;
+    background-position: top right;
+    background-blend-mode: multiply;
+    height: 100vh;
+    margin-top: -20px;
+}
+
+#schedule {
+  /* background-color: #fff; */
+  /* color: #000; */
+  padding: 5%;
+}
+
+#contact-form-container {
+  margin: auto;
+  width: 80%;
+  max-width: 700px;
+  height: 500px;
+  margin-top: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.App-header {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.social-media {
+  width: 2em;
+  height: 2em;
+}
+
+a, a:visited, a:focus, a:hover, a:active {
+  color: #3a3f4a;
+  margin: 2vw;
+} */
