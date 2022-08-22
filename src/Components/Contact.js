@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
-// import FilledInput from '@mui/material/FilledInput';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
-// import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
 
 const Contact = () => {
+
+  //* refactor code below
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ const Contact = () => {
       console.error(error);
     }
   };
-  const contactInfoForm = ['name', 'phone number','email', 'message'];
+  const contactInfoForm = ['name', 'phone number', 'email', 'message'];
 
   return (
     <div id='contact' style={{ height: '90vh', border: '2px solid green' }}>
@@ -51,17 +51,17 @@ const Contact = () => {
                 field === 'name'
                   ? setName(event.target.value)
                   : field === 'phone number'
-                  ? setPhone(event.target.value)
-                  : field === 'email'
-                  ? setEmail(event.target.value)
-                  : setMessage(event.target.value);
+                    ? setPhone(event.target.value)
+                    : field === 'email'
+                      ? setEmail(event.target.value)
+                      : setMessage(event.target.value);
               }}
             />
             { field === 'email' ? (
               <FormHelperText>Please ensure the address is entered correctly</FormHelperText>
             ) : field === 'message' ? (
               <FormHelperText style={ message.length >= 500 ? { color: 'red' } : null }>
-              {message.length ? `${message.length}/500` : null}</FormHelperText>
+                {message.length ? `${message.length}/500` : null}</FormHelperText>
             ) : null }
           </FormControl>
         ))}

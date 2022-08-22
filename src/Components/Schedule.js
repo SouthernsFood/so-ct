@@ -57,7 +57,7 @@ const Schedule = () => {
         {days.map((day, index) => (
           <React.Fragment key={index}>
             <h3>{day}: 
-            <Button onClick={handleOpen}>Open Modal</Button>
+              <Button onClick={handleOpen}>Open Modal</Button>
             </h3>
           </React.Fragment>
         ))}
@@ -70,7 +70,7 @@ export default Schedule;
 
 
 // eslint-disable-next-line no-lone-blocks
-{/* <h3>
+{ /* <h3>
           Monday: <Button onClick={handleOpen}>Second Line Brewing</Button>
         </h3>
         <h3>Tuesday: Miel Brewery & Taproom</h3>
@@ -79,4 +79,4 @@ export default Schedule;
         <h3>Friday: Second Line Brewing</h3>
         <h3>Saturday: Tin Roof Brewing Co.</h3>
         <h3>&emsp;&emsp;Faubourg Beer</h3>
-        <h3>Sunday: Miel Brewery & Taproom</h3> */}
+        <h3>Sunday: Miel Brewery & Taproom</h3> */ }

@@ -1,39 +1,70 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import lightTheme from './themes/lightTheme.js';
 import darkTheme from './themes/darkTheme.js';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TopNavBar from './Components/TopNavBar';
 import Home from './Pages/Home.js';
 import Login from './Pages/Login.js';
+import Dashboard from './Pages/Dashboard.js';
+import Error from './Pages/Error.js';
+import Header from './Components/CMS/Header.js';
 import './styles/App.css';
-
 function App() {
-  const theme = useSelector((state) => state.theme.value);
+  const {value: theme} = useSelector((state) => state.theme);
+  const { user } = useSelector((state) => state.auth);
 
   const defaultContainer = (
     <>
       <TopNavBar />
       <div className='App'>
         <Routes>
-          <Route index element={<Home />} />
+          <Route path='/' element={<Home />} />
+          <Route path='*' element={<Error />} />
+        </Routes>
+      </div>
+    </>
+  );
+  const loginContainer = (
+    <>
+      <div className='cms'>
+        <Routes>
+          <Route index element={<Login />} />
         </Routes>
       </div>
     </>
   );
 
+  const cmsContainer = (
+    <>
+      {
+        user ? <Header/> : null
+      }
+      <div className='cms'>
+        <Routes>    
+          <Route index element={<Dashboard />} />
+        </Routes>
+      </div>
+    </>
+  );
 
   return (
-    <Router>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-        <CssBaseline />
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='*' element={defaultContainer} />
-        </Routes>
-      </ThemeProvider>
-    </Router>
+    <>
+      <Router>
+        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+          <CssBaseline />
+          <Routes>
+            <Route path='/login/*' element={loginContainer} />
+            <Route path='/content/*' element={cmsContainer} />
+            <Route path='/*' element={defaultContainer} />
+          </Routes>
+        </ThemeProvider>
+      </Router>
+      <ToastContainer />
+    </>
   );
 }
 
