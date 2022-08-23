@@ -67,12 +67,12 @@ const Login = () => {
       noValidate
       autoComplete='off'>
       {/* <Link to='/' > */}
-        <img
-          src={logo_southerns}
-          // className='drawer-logo'
-          alt='logo'
-          style={{ height: '40vh', width: 'auto', color: 'black' }}
-        />
+      <img
+        src={logo_southerns}
+        // className='drawer-logo'
+        alt='logo'
+        style={{ height: '40vh', width: 'auto', color: 'black' }}
+      />
       {/* </Link> */}
       <TextField
         id='outlined-basic'

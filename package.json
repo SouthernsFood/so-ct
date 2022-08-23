@@ -13,6 +13,7 @@
     "@mui/material": "^5.10.0",
     "@reduxjs/toolkit": "^1.8.4",
     "axios": "^0.27.2",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
@@ -32,7 +33,19 @@
   "eslintConfig": {
     "extends": [
       "react-app"
-    ]
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "indent": [ 1, 2 ],
+      "semi": [ 1, "always" ],
+      "quotes": [ 1, "single" ],
+      "no-console": 1,
+      "space-before-blocks": [ 1, "always" ],
+      "keyword-spacing": [ 1,
+        { "before": true, "after": true }
+      ]
+    }
   },
   "browserslist": {
     "production": [

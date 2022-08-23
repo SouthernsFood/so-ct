@@ -12,6 +12,20 @@
   text-align: center;
 }
 
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cms-header-link {
+  cursor: pointer;
+}
+
+a[aria-current = "page"] {
+  font-weight: 1000;
+}
+
 .App-logo {
   height: 60vmin;
 }
