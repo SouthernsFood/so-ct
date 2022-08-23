@@ -6,20 +6,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -45%)',
-  // width: 400,
-  width: '100%',
-  height: '93vh',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import style from './util/modalStyle.js';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const week = 'Aug 15 - Aug 21';
@@ -40,7 +27,9 @@ const Schedule = () => {
           aria-labelledby='modal-modal-title'
           aria-describedby='modal-modal-description'>
           <Box sx={style}>
-            <CloseIcon onClick={handleClose} />
+            <CloseIcon onClick={handleClose} style={{
+              marginLeft: '95%',
+              cursor: 'pointer' }}/>
             <Divider />
             <Typography id='modal-modal-title' variant='h6' component='h2'>
               Text in a modal

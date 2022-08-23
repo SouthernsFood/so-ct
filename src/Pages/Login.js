@@ -76,6 +76,7 @@ const Login = () => {
       {/* </Link> */}
       <TextField
         id='outlined-basic'
+        type='email'
         name='email'
         label='email'
         variant='outlined'

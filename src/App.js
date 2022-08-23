@@ -12,7 +12,7 @@ import Login from './Pages/Login.js';
 import Dashboard from './Pages/Dashboard.js';
 import Error from './Pages/Error.js';
 import Header from './Components/CMS/Header.js';
-import Events from './Components/CMS/Events.js';
+import Events from './Components/CMS/Events/Events.js';
 import Emails from './Components/CMS/Emails.js';
 import Menu from './Components/CMS/Menu.js';
 

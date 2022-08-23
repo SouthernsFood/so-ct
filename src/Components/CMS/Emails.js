@@ -16,9 +16,6 @@ const Emails = () => {
     if (isError) {
       toast.error(message);
     }
-    // if (isSuccess) {
-    //   toast.success(message);
-    // }
     dispatch(reset());
   } , [isError, isSuccess, message, dispatch]);;
   

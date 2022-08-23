@@ -19,10 +19,10 @@ const Contact = () => {
   // const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
   const handleSubmit = async (data) => {
     try {
-      const response = await axios.post('/api/mailer/send', data);
-      console.log(response);
+      const response = await axios.post('/api/mailer/send', data);;
       return response;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   };
