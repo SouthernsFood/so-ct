@@ -1,25 +1,27 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
 import { useSelector } from 'react-redux';
-import EventModal from './EventModal';
-
+// import EventModal from './EventModal';
+// import { setEventObject } from '../state/features/events/eventSlice.js';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import CloseIcon from '@mui/icons-material/Close';
+import Divider from '@mui/material/Divider';
+import style from './util/modalStyle.js';
+import Modal from '@mui/material/Modal';
 
 const Schedule = () => {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const week = 'Aug 15 - Aug 21';
 
-  const eventModalRef = useRef();
+  // const eventModalRef = useRef();
+  const [event, setEvent] = useState({});
   const [open, setOpen] = useState(false);
-  const handleOpen = (i) => setOpen(true);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const dayProp = i => document.getElementsByTagName('h3')[i].innerHTML.split(':')[0];
-      
-
   const { thisWeek } = useSelector((state) => state.events);
-  // console.log(dayText);
-  
+
   return (
     <div id='schedule' style={{ height: '91vh', border: '2px solid black' }}>
       <Modal
@@ -28,27 +30,38 @@ const Schedule = () => {
         onClose={handleClose}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'>
-        <EventModal thisWeek={thisWeek} handleClose={handleClose} ref={eventModalRef} />
+
+        <Box sx={style} /*ref={ref}*/ tabIndex={-1}>
+          <CloseIcon
+            onClick={handleClose}
+            style={{
+              marginLeft: '95%',
+              cursor: 'pointer',
+            }}
+          />
+          <Divider />
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
+            {event.venue}
+          </Typography>
+          <Typography id='modal-modal-description' sx={{ mt: 2 }}>
+            {event.address}
+          </Typography>
+        </Box>
       </Modal>
+
       <h1>Popup Schedule</h1>
       <h2>{week}</h2>
       <div id='schedule-container'>
         {days.map((day, index) => {
           return (
             <React.Fragment key={index}>
-              {/* <Modal
-                disableEnforceFocus
-                open={open}
-                onClose={handleClose}
-                aria-labelledby='modal-modal-title'
-                aria-describedby='modal-modal-description'>
-                <EventModal thisWeek={thisWeek} handleClose={handleClose} ref={eventModalRef} 
-                  day={day} />
-              </Modal> */}
               <h3>
                 {day}:
                 <Button
-                  onClick={() => handleOpen(index)}
+                  onClick={() => {
+                    setEvent(thisWeek[day]);
+                    handleOpen();
+                  }}
                   disabled={thisWeek[day].venue ? false : true}>
                   {thisWeek[day].venue ? thisWeek[day].venue : 'OFF'}
                 </Button>

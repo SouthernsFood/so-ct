@@ -3,6 +3,7 @@ import eventService from './eventService';
 
 const initialState = {
   events: [],
+  event: {},
   thisWeek: {
     Monday: {},
     Tuesday: {},
@@ -64,7 +65,10 @@ export const eventSlice = createSlice({
     setThisWeek: (state, action) => {
       state.thisWeek = action.payload;
       // console.log(action.payload);
-    }
+    },
+    // setEventObject: (state, action) => {
+    //   state.event = action.payload;
+    // }
   },
   extraReducers: (builder) => {
     builder
@@ -102,5 +106,5 @@ export const eventSlice = createSlice({
   }
 });
 
-export const { reset, resetSchedule, setThisWeek } = eventSlice.actions;
+export const { reset, resetSchedule, setThisWeek, setEventObject } = eventSlice.actions;
 export default eventSlice.reducer;

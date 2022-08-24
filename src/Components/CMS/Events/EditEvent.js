@@ -11,7 +11,7 @@ const EditEvent = forwardRef((props, ref) => {
   const { event, handleClose } = props;
 
   return (
-    <Box sx={style} ref={ref}>
+    <Box sx={style} ref={ref} tabIndex={-1}>
       <CloseIcon
         onClick={handleClose}
         style={{

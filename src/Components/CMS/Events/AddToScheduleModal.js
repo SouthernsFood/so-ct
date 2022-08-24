@@ -29,7 +29,7 @@ const AddToScheduleModal = forwardRef((props, ref) => {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   return (
-    <Box sx={style} ref={ref}>
+    <Box sx={style} ref={ref} tabIndex={-1}>
       <CloseIcon
         onClick={handleClose}
         style={{
@@ -53,7 +53,7 @@ const AddToScheduleModal = forwardRef((props, ref) => {
             />
           ))}
         </RadioGroup>
-        <Button variant='contained' onClick={()=>handleSubmit()}>
+        <Button variant='contained' onClick={() => handleSubmit()}>
           Submit
         </Button>
       </FormControl>
