@@ -32,6 +32,22 @@ export const getAll = createAsyncThunk('events/getAll', async (_, thunkAPI) => {
   }
 });
 
+export const addToThisWeek = createAsyncThunk('events/addToThisWeek', async (event, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    const { thisWeek } = thunkAPI.getState().events;
+    const { dayName } = event;
+    thisWeek[dayName] = event;
+    return await eventService.addToThisWeek(token, thisWeek);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const eventSlice = createSlice({
   name: 'events',
   initialState,
@@ -43,9 +59,12 @@ export const eventSlice = createSlice({
       state.message = '';
     },
     resetSchedule: (state) => {
-      console.log('resetSchedule');
       state.thisWeek = initialState.thisWeek;
     },
+    setThisWeek: (state, action) => {
+      state.thisWeek = action.payload;
+      // console.log(action.payload);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -64,8 +83,24 @@ export const eventSlice = createSlice({
         state.message = action.payload;
         state.events = null;
       });
+    // .addCase(addToThisWeek.pending, (state) => {
+    //   state.isLoading = true;
+    // })
+    // .addCase(addToThisWeek.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isSuccess = true;
+    //   state.message = action.payload.message;
+    //   state.thisWeek = action.payload.thisWeek;
+    //   console.log(state.thisWeek);
+    // })
+    // .addCase(addToThisWeek.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isError = true;
+    //   state.message = action.payload;
+    //   state.thisWeek = null;
+    // });
   }
 });
 
-export const { reset, resetSchedule } = eventSlice.actions;
+export const { reset, resetSchedule, setThisWeek } = eventSlice.actions;
 export default eventSlice.reducer;

@@ -25,16 +25,17 @@ const Emails = () => {
 
   return (
     <div>
-      <h1>Emails</h1>
-      { !inbox.length ? 
+      <h1 style={{ marginTop: '-5vh' }}>Emails</h1>
+      {!inbox.length ? (
         <Button onClick={() => dispatch(getAll())}>Load All Incoming mail</Button>
-        : null
-      }
-      {inbox.length ?
+      ) : null}
+      {inbox.length ? (
         inbox.map((mail) => (
-          <Stack key={mail._id} spacing={1}
+          <Stack
+            key={mail._id}
+            spacing={1}
             style={{
-              width: '90vw',
+              width: window.innerWidth < 700 ? '97vw' : '95vw',
               margin: 'auto',
               marginTop: '2vh',
               border: 'solid 2px black',
@@ -44,13 +45,17 @@ const Emails = () => {
               paddingBottom: '1vh',
             }}>
             <h3>{mail.name}</h3>
-            <p>{mail.phone} - {mail.email}</p>
+            <p>
+              <a href={`tel:+1${mail.phone.replace(/\D/g, '')}`}>{mail.phone}</a> —{' '}
+              <a href={`mailto:${mail.email}`}>{mail.email}</a>
+            </p>
             <p>{mail.message}</p>
             <p>{moment(mail.createdAt).format('MMMM Do YYYY, h:mm a')}</p>
           </Stack>
-        )) :
+        ))
+      ) : (
         <p>No mail loaded</p>
-      }
+      )}
     </div>
   );
 };

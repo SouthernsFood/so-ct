@@ -83,7 +83,11 @@ a[aria-current = "page"] {
   animation: spin 1.2s linear infinite;
 }
 
+/* a:hover {
+  text-decoration: underline;
+} */
 
+  
 
 
 

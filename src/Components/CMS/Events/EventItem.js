@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Spinner from '../../Spinner.js';
 import Modal from '@mui/material/Modal';
@@ -9,6 +9,9 @@ import EditEvent from './EditEvent.js';
 import AddToScheduleModal from './AddToScheduleModal.js';
 
 const EventItem = ({ event }) => {
+  const editModalRef = useRef();
+  const addToScheduleModalRef = useRef();
+
   const [openEdit, setOpenEdit] = useState(false);
   const handleOpenEdit = () => setOpenEdit(true);
   const handleCloseEdit = () => setOpenEdit(false);
@@ -17,12 +20,11 @@ const EventItem = ({ event }) => {
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
 
-  const dispatch = useDispatch();
-  const { events, thisWeek, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.events
-  );
+  // const dispatch = useDispatch();
+  const { /*events, thisWeek, isSuccess,*/ isLoading, isError, message } = useSelector(
+    state => state.events);
 
-  const onAddToThisWeek = (event) => {};
+  // const onAddToThisWeek = (event) => {};
 
   if (isError) {
     toast.error(message);
@@ -35,6 +37,8 @@ const EventItem = ({ event }) => {
   return (
     <>
       <Modal
+        // disableEnforceFocus
+        ref={editModalRef}
         open={openEdit}
         onClose={handleCloseEdit}
         aria-labelledby='modal-modal-title'
@@ -42,6 +46,8 @@ const EventItem = ({ event }) => {
         <EditEvent event={event} handleClose={handleCloseEdit} />
       </Modal>
       <Modal
+        // disableEnforceFocus
+        ref={addToScheduleModalRef}
         open={openAdd}
         onClose={handleCloseAdd}
         aria-labelledby='modal-modal-title'
@@ -51,7 +57,7 @@ const EventItem = ({ event }) => {
       <Stack
         spacing={1}
         style={{
-          width: '90vw',
+          width: window.innerWidth < 700 ? '97vw' : '95vw',
           margin: 'auto',
           marginTop: '2vh',
           border: 'solid 2px black',

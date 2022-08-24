@@ -4,21 +4,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getAll, reset } from '../../../state/features/events/eventSlice.js';
 import Spinner from '../../Spinner.js';
-// import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import EventItem from './EventItem.js';
 
 
 const Events = () => {
   const dispatch = useDispatch();
-  const { events, thisWeek, isLoading, isError, isSuccess, message } = useSelector((state) => state.events);
-  // console.log({thisWeek});
+  const { events, isLoading, isError, /*isSuccess,*/ message } = useSelector((state) => state.events);
+
   useEffect(() => {
     if (isError) {
       toast.error(message);
     }
     dispatch(reset());
-  }, [isError, isSuccess, message, dispatch]);
+  }, [isError, message, dispatch]);
 
   if (isLoading) {
     return <Spinner />;
@@ -38,21 +37,21 @@ const Events = () => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Button onClick={(e) => {
-          dispatch(getAll());
-          console.log(e.target.firstChild.data);
-        }}>show all</Button>
+        <Button onClick={() => {dispatch(getAll());}}>
+          show all
+        </Button>
         <p>—</p>
         <Button>new event</Button>
         <p>—</p>
         <Button>this week</Button>
         <p>—</p>
-        <Button >reset schedule</Button>
+        <Button>reset schedule</Button>
       </Stack>
-      {
-        events.length ? events.map(event => <EventItem key={event.id} event={event} />)
-          : <p>No events loaded</p>
-      }
+      {events.length ? (
+        events.map((event) => <EventItem key={event.id} event={event} />)
+      ) : (
+        <p>No events loaded</p>
+      )}
     </>
   );
 };

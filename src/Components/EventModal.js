@@ -1,17 +1,16 @@
 import { forwardRef } from 'react';
-import style from '../../util/modalStyle';
+
 import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
+import Divider from '@mui/material/Divider';
+import style from './util/modalStyle.js';
 
-const EditEvent = forwardRef((props, ref) => {
+const EventModal = forwardRef((props, ref) => {
+  const { thisWeek, handleClose } = props;
   console.log(props);
-  const { event, handleClose } = props;
-
   return (
-    <Box sx={style} ref={ref}>
+    <Box sx={style} ref={ref} tabIndex={-1}>
       <CloseIcon
         onClick={handleClose}
         style={{
@@ -21,13 +20,13 @@ const EditEvent = forwardRef((props, ref) => {
       />
       <Divider />
       <Typography id='modal-modal-title' variant='h6' component='h2'>
-        {event.venue}
+        hello world {}
       </Typography>
       <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-        {event.address}
+        hello world
       </Typography>
     </Box>
   );
 });
 
-export default EditEvent;
+export default EventModal;

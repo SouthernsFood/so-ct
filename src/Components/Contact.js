@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
+import { toast } from 'react-toastify';
 
 const Contact = () => {
 
@@ -19,7 +20,15 @@ const Contact = () => {
   // const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
   const handleSubmit = async (data) => {
     try {
-      const response = await axios.post('/api/mailer/send', data);;
+      const response = await axios.post('/api/mailer/send', data);
+      console.log(response);
+      if (response.status === 201) {
+        setName('');
+        setPhone('');
+        setEmail('');
+        setMessage('');
+        toast.success(response.data);
+      }
       return response;
     } catch (error) {
       // eslint-disable-next-line no-console

@@ -3,7 +3,7 @@ import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 import { logout, reset } from '../../state/features/auth/authSlice.js';
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FaSignOutAlt, FaHome } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -39,6 +39,9 @@ const Header = () => {
         paddingRight: '5vw',
       }}>
       <Breadcrumbs aria-label='breadcrumb' className='header-container'>
+        <Button onClick={() => navigate('/')}>
+          <FaHome />
+        </Button>
         {links.map((link, index) => (
           <Link
             key={`${link}-${index}`}

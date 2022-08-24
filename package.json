@@ -40,7 +40,6 @@
       "indent": [ 1, 2 ],
       "semi": [ 1, "always" ],
       "quotes": [ 1, "single" ],
-      "no-console": 1,
       "space-before-blocks": [ 1, "always" ],
       "keyword-spacing": [ 1,
         { "before": true, "after": true }

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import style from '../../util/modalStyle';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,21 +11,25 @@ import FormLabel from '@mui/material/FormLabel';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
+import { setThisWeek } from '../../../state/features/events/eventSlice.js';
 
-const AddToScheduleModal = ({ event, handleClose }) => {
+const AddToScheduleModal = forwardRef((props, ref) => {
+  const dispatch = useDispatch();
+  const { event, handleClose } = props;
   const [dayName, setDayName] = useState('');
-
-  // console.log(event);
+  const { thisWeek } = useSelector((state) => state.events);
+  console.log(thisWeek);
   
   const handleSubmit = () => {
-    console.log(dayName);
+    dispatch(setThisWeek({ ...thisWeek, [dayName]: event }));
+    // dispatch(setThisWeek());
     handleClose();
   };
 
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   return (
-    <Box sx={style}>
+    <Box sx={style} ref={ref}>
       <CloseIcon
         onClick={handleClose}
         style={{
@@ -48,12 +53,12 @@ const AddToScheduleModal = ({ event, handleClose }) => {
             />
           ))}
         </RadioGroup>
-        <Button variant='contained' onClick={handleSubmit}>
+        <Button variant='contained' onClick={()=>handleSubmit()}>
           Submit
         </Button>
       </FormControl>
     </Box>
   );
-};
+});
 
 export default AddToScheduleModal;
