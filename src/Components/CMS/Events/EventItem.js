@@ -1,34 +1,42 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import Spinner from '../../Spinner.js';
 import Modal from '@mui/material/Modal';
 import EditEvent from './EditEvent.js';
 import AddToScheduleModal from './AddToScheduleModal.js';
+import { reset } from '../../../state/features/events/eventSlice.js';
 
 const EventItem = ({ event }) => {
   const editModalRef = useRef();
   const addToScheduleModalRef = useRef();
 
+  // const [eventobj, setEventobj] = useState({});
+
   const [openEdit, setOpenEdit] = useState(false);
-  const handleOpenEdit = () => setOpenEdit(true);
+  const handleOpenEdit = () => {
+    // setEventobj(event);  
+    setOpenEdit(true);
+  };
   const handleCloseEdit = () => setOpenEdit(false);
 
   const [openAdd, setOpenAdd] = useState(false);
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { /*events, thisWeek, isSuccess,*/ isLoading, isError, message } = useSelector(
     state => state.events);
 
   // const onAddToThisWeek = (event) => {};
-
-  if (isError) {
-    toast.error(message);
-  }
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    dispatch(reset());
+  }, [dispatch, isError, message]);
 
   if (isLoading) {
     return <Spinner />;
@@ -36,17 +44,17 @@ const EventItem = ({ event }) => {
 
   return (
     <>
-      <Modal
-        // disableEnforceFocus
+      <Modal //* Edit Event Modal
         ref={editModalRef}
         open={openEdit}
         onClose={handleCloseEdit}
+        // eventobj={eventobj}
+        event={event}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'>
         <EditEvent event={event} handleClose={handleCloseEdit} />
       </Modal>
-      <Modal
-        // disableEnforceFocus
+      <Modal //* Add to Schedule Modal
         ref={addToScheduleModalRef}
         open={openAdd}
         onClose={handleCloseAdd}

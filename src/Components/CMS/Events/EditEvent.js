@@ -1,13 +1,15 @@
 import { forwardRef } from 'react';
 import style from '../../util/modalStyle';
 import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { toast } from 'react-toastify';
+
 
 const EditEvent = forwardRef((props, ref) => {
-  console.log(props);
   const { event, handleClose } = props;
 
   return (
@@ -20,14 +22,45 @@ const EditEvent = forwardRef((props, ref) => {
         }}
       />
       <Divider />
-      <Typography id='modal-modal-title' variant='h6' component='h2'>
-        {event.venue}
+      <Typography id='modal-modal-title' variant='h6' component='h2' 
+        style={{ marginBottom: '1rem', marginTop: '1rem'
+        }}>
+        Edit Event
       </Typography>
-      <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-        {event.address}
-      </Typography>
+      {
+        event && Object.keys(event).map((key) => (
+          key !== 'id' && (
+            <TextField
+              style={{ margin: '10px', width: '95%' }}
+              key={key}
+              label={key}
+              // margin='normal'
+              value={event[key]}
+              onChange={(e) => {
+                event[key] = e.target.value;
+              } }
+            />
+          )))
+      }
+      <Button variant='contained' onClick={() => {
+        toast.success('Event updated');
+        console.log('Button clicked!');
+        handleClose();
+      }}> Save Changes </Button>
+      
     </Box>
   );
 });
 
 export default EditEvent;
+
+/*
+
+<TextField
+        id='standard-basic'
+        label='Event Description'
+        defaultValue={event.description}
+        margin='normal'
+      />
+      
+      */

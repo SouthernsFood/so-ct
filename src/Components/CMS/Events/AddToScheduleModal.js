@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import { setThisWeek } from '../../../state/features/events/eventSlice.js';
+import { toast } from 'react-toastify';
+
 
 const AddToScheduleModal = forwardRef((props, ref) => {
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const AddToScheduleModal = forwardRef((props, ref) => {
   
   const handleSubmit = () => {
     dispatch(setThisWeek({ ...thisWeek, [dayName]: event }));
-    // dispatch(setThisWeek());
+    toast.success('Event added to this week\'s schedule');
     handleClose();
   };
 
