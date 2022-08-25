@@ -38,13 +38,13 @@ a[aria-current = "page"] {
 
 #home {
   background-color: #1554e7;
-    color: #fff;
-    background-image: url('../imgs/southerns-truck-reflection.jpg');
-    background-size: cover;
-    background-position: top right;
-    background-blend-mode: multiply;
-    height: 100vh;
-    margin-top: -20px;
+  color: #fff;
+  background-image: url('../imgs/southerns-truck-reflection.jpg');
+  background-size: cover;
+  background-position: top right;
+  background-blend-mode: multiply;
+  height: 100vh;
+  margin-top: -20px;
 }
 
 #schedule {

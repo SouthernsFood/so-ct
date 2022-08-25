@@ -47,6 +47,36 @@ export const update = createAsyncThunk('events/update', async (event, thunkAPI) 
   }
 });
 
+// Add new event
+export const addNew = createAsyncThunk('events/addNew', async (event, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await eventService.addNewEvent(token, event);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});//.rejects;
+
+// Delete event
+export const deleteEvent = createAsyncThunk('events/delete', async (event, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await eventService.deleteEvent(token, event);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});//.rejects;
+
+
+// //******* Event Schedule *******//
 export const addToThisWeek = createAsyncThunk('events/addToThisWeek', async (event, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user.token;
@@ -63,6 +93,36 @@ export const addToThisWeek = createAsyncThunk('events/addToThisWeek', async (eve
   }
 });
 
+export const removeFromThisWeek = createAsyncThunk('events/removeFromThisWeek', async (event, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    const { thisWeek } = thunkAPI.getState().events;
+    const { dayName } = event;
+    thisWeek[dayName] = {};
+    return await eventService.removeFromThisWeek(token, thisWeek);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  } 
+});//.rejects;
+
+// get this week events
+export const getThisWeek = createAsyncThunk('events/getThisWeek', async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await eventService.getThisWeek(token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});//.rejects;
+
 export const eventSlice = createSlice({
   name: 'events',
   initialState,
@@ -78,11 +138,8 @@ export const eventSlice = createSlice({
     },
     setThisWeek: (state, action) => {
       state.thisWeek = action.payload;
-      // console.log(action.payload);
     },
-    // setEventObject: (state, action) => {
-    //   state.event = action.payload;
-    // }
+    
   },
   extraReducers: (builder) => {
     builder
@@ -92,7 +149,6 @@ export const eventSlice = createSlice({
       .addCase(getAll.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // state.message = action.payload.message;
         state.events = action.payload;
       })
       .addCase(getAll.rejected, (state, action) => {
@@ -118,7 +174,53 @@ export const eventSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.event = null;
+      })
+      .addCase(addNew.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addNew.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.events.push(action.payload);
+      })
+      .addCase(addNew.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.event = null;
+      })
+      .addCase(deleteEvent.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteEvent.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        const { events } = state;
+        const { id } = action.payload;
+        const index = events.findIndex((e) => e.id === id);
+        events.splice(index, 1);
+        state.events = events;
+      })
+      .addCase(deleteEvent.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.event = null;
       });
+    // .addCase(addToThisWeek.pending, (state) => {
+    //   state.isLoading = true;
+    // })
+    // .addCase(addToThisWeek.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isSuccess = true;
+    //   state.thisWeek = action.payload;
+    // })
+    // .addCase(addToThisWeek.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isError = true;
+    //   state.message = action.payload;
+    //   state.thisWeek = null;
+    // });
   }
 });
 

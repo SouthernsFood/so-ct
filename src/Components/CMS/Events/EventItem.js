@@ -13,13 +13,8 @@ const EventItem = ({ event }) => {
   const editModalRef = useRef();
   const addToScheduleModalRef = useRef();
 
-  // const [eventobj, setEventobj] = useState({});
-
   const [openEdit, setOpenEdit] = useState(false);
-  const handleOpenEdit = () => {
-    // setEventobj(event);  
-    setOpenEdit(true);
-  };
+  const handleOpenEdit = () => setOpenEdit(true);
   const handleCloseEdit = () => setOpenEdit(false);
 
   const [openAdd, setOpenAdd] = useState(false);
@@ -27,10 +22,8 @@ const EventItem = ({ event }) => {
   const handleCloseAdd = () => setOpenAdd(false);
 
   const dispatch = useDispatch();
-  const { /*events, thisWeek, isSuccess,*/ isLoading, isError, message } = useSelector(
-    state => state.events);
+  const { isLoading, isError, message } = useSelector(state => state.events);
 
-  // const onAddToThisWeek = (event) => {};
   useEffect(() => {
     if (isError) {
       toast.error(message);
