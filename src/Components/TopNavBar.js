@@ -54,7 +54,7 @@ function TopNavBar() {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box style={{ display: 'flex' }}>
       <AppBar component='nav' style={{ height: '8vh' }}>
         <Toolbar>
           <IconButton
@@ -81,11 +81,16 @@ function TopNavBar() {
               cursor: 'pointer',
             }}
           />
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box
+            sx={{ display: { xs: 'none', sm: 'block' }, /*border: 'solid 1px red',*/ width: '75%',
+              position: 'relative', top: '0.25vh', left: '-1vw', textAlign: 'center' 
+            }}>
             {navItems.map((item) => (
               <Button
                 key={item}
-                sx={{ color: '#fff' }}
+                sx={{ color: '#fff', /*border: 'solid 1px red',*/ margin: '0.5vh 2vw', textAlign: 'center',
+                  fontSize: '2.5vh', cursor: 'pointer'
+                }}
                 onClick={() => {
                   window.location.href = `#${item.toLowerCase()}`;
                 }}>

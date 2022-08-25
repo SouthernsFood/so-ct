@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -10,8 +10,7 @@ import EventItem from './EventItem.js';
 
 const Events = () => {
   const dispatch = useDispatch();
-  const { events, isLoading, isError, /*isSuccess,*/ message } = useSelector((state) => state.events);
-
+  const { events, isLoading, isError, message } = useSelector((state) => state.events);
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -22,7 +21,6 @@ const Events = () => {
   if (isLoading) {
     return <Spinner />;
   }
-  // const resetSchedule = () => console.log('reset schedule clicked!');
 
   return (
     <>
@@ -37,7 +35,7 @@ const Events = () => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Button onClick={() => {dispatch(getAll());}}>
+        <Button onClick={() => dispatch(getAll())}>
           show all
         </Button>
         <p>—</p>
@@ -47,11 +45,13 @@ const Events = () => {
         <p>—</p>
         <Button>reset schedule</Button>
       </Stack>
-      {events.length ? (
-        events.map((event) => <EventItem key={event.id} event={event} />)
-      ) : (
-        <p>No events loaded</p>
-      )}
+      {
+        events.length ? events.map(event => (
+          <Fragment key={event.id}>
+            <EventItem event={event} />
+          </Fragment>))
+          : <p>No events loaded</p>
+      }
     </>
   );
 };

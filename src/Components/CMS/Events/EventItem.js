@@ -73,6 +73,7 @@ const EventItem = ({ event }) => {
           paddingRight: '1vh',
           paddingLeft: '1vh',
           paddingBottom: '1vh',
+          maxWidth: window.innerWidth < 700 ? '98vw' : window.innerWidth < 1300 ?'80vw' : '90vw',
         }}>
         <Stack
           direction='row'

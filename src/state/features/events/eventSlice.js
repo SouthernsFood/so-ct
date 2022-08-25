@@ -33,6 +33,20 @@ export const getAll = createAsyncThunk('events/getAll', async (_, thunkAPI) => {
   }
 });
 
+// Update event
+export const update = createAsyncThunk('events/update', async (event, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await eventService.updateEvent(token, event);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const addToThisWeek = createAsyncThunk('events/addToThisWeek', async (event, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user.token;
@@ -86,23 +100,25 @@ export const eventSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.events = null;
+      })
+      .addCase(update.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(update.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        const { events } = state;
+        const { id, ...event } = action.payload;
+        const index = events.findIndex((e) => e.id === id);
+        events[index] = event;
+        state.events = events;
+      })
+      .addCase(update.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.event = null;
       });
-    // .addCase(addToThisWeek.pending, (state) => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(addToThisWeek.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   state.isSuccess = true;
-    //   state.message = action.payload.message;
-    //   state.thisWeek = action.payload.thisWeek;
-    //   console.log(state.thisWeek);
-    // })
-    // .addCase(addToThisWeek.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.isError = true;
-    //   state.message = action.payload;
-    //   state.thisWeek = null;
-    // });
   }
 });
 
