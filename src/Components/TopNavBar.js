@@ -13,14 +13,17 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 // import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 // import LightModeIcon from '@mui/icons-material/LightMode';
-// import { useDispatch, useSelector } from 'react-redux';
 // import { setTheme } from '../state/features/themeSlice';
+// import { useDispatch, useSelector } from 'react-redux';
+
+// import { useNavigate } from 'react-router-dom';
 import logo_southerns from '../imgs/logo_southerns.svg';
 const drawerWidth = 240;
 const navItems = ['Home', /*'About',*/ 'Schedule', 'Menu', /*'Merch',*/ 'Contact'];
 
 function TopNavBar() {
   // const navigate = useNavigate();
+
   // const dispatch = useDispatch();
   // const theme = useSelector((state) => state.theme.value);
   const [mobileOpen, setMobileOpen] = useState(false);

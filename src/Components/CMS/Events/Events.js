@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment, useRef } from 'react';
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getAll, reset } from '../../../state/features/events/eventSlice.js';
+import { getAll, reset, resetSchedule } from '../../../state/features/events/eventSlice.js';
 import Spinner from '../../Spinner.js';
 import Stack from '@mui/material/Stack';
 import EventItem from './EventItem.js';
@@ -34,6 +34,13 @@ const Events = () => {
   if (isLoading) {
     return <Spinner />;
   }
+
+  const confirmReset = () => {
+    if (window.confirm('Are you sure you want to reset the schedule?')) {
+      dispatch(resetSchedule());
+      toast.success('Schedule reset');
+    }
+  };
 
   return (
     <>
@@ -72,7 +79,8 @@ const Events = () => {
         <p>—</p>
         <Button onClick={handleOpenThisWeek}>this week</Button>
         <p>—</p>
-        <Button>reset schedule</Button>
+        <Button
+          onClick={confirmReset}>reset schedule</Button>
       </Stack>
       {
         events.length ? events.map(event => (

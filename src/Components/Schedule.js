@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // import EventModal from './EventModal';
-// import { setEventObject } from '../state/features/events/eventSlice.js';
+import { getThisWeek } from '../state/features/events/eventSlice.js';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
@@ -20,7 +20,14 @@ const Schedule = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const dispatch = useDispatch();
   const { thisWeek } = useSelector((state) => state.events);
+
+  useEffect(() => {
+    console.log(thisWeek);
+    dispatch(getThisWeek());
+  } , [dispatch, thisWeek]);
+
 
   return (
     <div id='schedule' style={{ height: '91vh', border: '2px solid black' }}>

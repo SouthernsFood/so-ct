@@ -72,7 +72,7 @@ function App() {
           </Routes>
         </ThemeProvider>
       </Router>
-      <ToastContainer />
+      <ToastContainer autoClose={2800} />
     </>
   );
 }
