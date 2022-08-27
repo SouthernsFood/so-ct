@@ -11,16 +11,15 @@ import Home from './Pages/Home.js';
 import Login from './Pages/Login.js';
 import Dashboard from './Pages/Dashboard.js';
 import Error from './Pages/Error.js';
-import Header from './Components/CMS/Header.js';
-import Events from './Components/CMS/Events/Events.js';
-import Emails from './Components/CMS/Emails.js';
-import Menu from './Components/CMS/Menu/Menu.js';
+import Header from './Components/content/Header.js';
+import Events from './Components/content/Events/Events.js';
+import Emails from './Components/content/Emails.js';
+import Menu from './Components/content/Menu/Menu.js';
 
 import './styles/App.css';
 
-
 function App() {
-  const {value: theme} = useSelector((state) => state.theme);
+  const { value: theme } = useSelector((state) => state.theme);
   const { user } = useSelector((state) => state.auth);
 
   const defaultContainer = (
@@ -46,11 +45,9 @@ function App() {
 
   const cmsContainer = (
     <>
-      {
-        user ? <Header/> : null
-      }
+      {user ? <Header /> : null}
       <div className='cms'>
-        <Routes>    
+        <Routes>
           <Route index element={<Dashboard />} />
           <Route path='/events' element={<Events />} />
           <Route path='/emails' element={<Emails />} />

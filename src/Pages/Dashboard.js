@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import Header from '../Components/CMS/Header.js';
+// import Header from '../Components/content/Header.js';
 import logo_southerns from '../imgs/logo_southerns.svg';
 import Stack from '@mui/material/Stack';
 
@@ -30,14 +30,12 @@ const Dashboard = () => {
               alt='logo'
               style={{ height: '40vh', width: 'auto', color: 'black' }}
             />
-            <h3 style={{marginTop: '-5vh'}}>Hello, {user.name}!</h3>
-            <p>
-              Use the links above to navigate
-            </p>
+            <h3 style={{ marginTop: '-5vh' }}>Hello, {user.name}!</h3>
+            <p>Use the links above to navigate</p>
           </Stack>
         </>
       ) : (
-        <h1 style={{ marginTop: '30vh'}}>
+        <h1 style={{ marginTop: '30vh' }}>
           <Link to='/login'>please login first</Link>
         </h1>
       )}
