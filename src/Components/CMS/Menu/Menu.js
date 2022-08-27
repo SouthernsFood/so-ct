@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import NewItemModal from './NewItemModal.js';
 import EditMenuItemModal from './EditMenuItemModal.js';
 import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
+
 
 
 const Menu = () => {
