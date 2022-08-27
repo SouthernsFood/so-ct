@@ -14,7 +14,7 @@ import Error from './Pages/Error.js';
 import Header from './Components/CMS/Header.js';
 import Events from './Components/CMS/Events/Events.js';
 import Emails from './Components/CMS/Emails.js';
-import Menu from './Components/CMS/Menu.js';
+import Menu from './Components/CMS/Menu/Menu.js';
 
 import './styles/App.css';
 
