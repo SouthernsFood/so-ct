@@ -9,12 +9,12 @@ import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
 import { update, getAll, setThisWeek } from '../../../state/features/events/eventSlice';
 import { useDispatch, useSelector } from 'react-redux';
-// import Spinner from '../../Spinner.js';
+
 
 
 const EditEvent = forwardRef(({ event, handleClose }, ref) => {
   const dispatch = useDispatch();
-  // console.log(event);
+
   const { id, venue, address, day, start, end, instagramHandle, description, image } = event;
   const [eventObject, setEventObject] = useState({
     id,
@@ -28,7 +28,6 @@ const EditEvent = forwardRef(({ event, handleClose }, ref) => {
     description,
   });
   const { thisWeek } = useSelector((state) => state.events);
-  // const { isLoading } = useSelector((state) => state.events);
 
   const handleSubmit = () => {
     try {
@@ -42,13 +41,9 @@ const EditEvent = forwardRef(({ event, handleClose }, ref) => {
     }
   };
 
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
-
 
   style.overflowY = 'auto';
-  // style.alignItems = 'center';
+
   return (
     <Box sx={style} ref={ref} tabIndex={-1}>
       <CloseIcon
@@ -95,13 +90,3 @@ const EditEvent = forwardRef(({ event, handleClose }, ref) => {
 
 export default EditEvent;
 
-/*
-
-<TextField
-        id='standard-basic'
-        label='Event Description'
-        defaultValue={event.description}
-        margin='normal'
-      />
-      
-      */
