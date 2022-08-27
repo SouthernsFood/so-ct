@@ -20,11 +20,10 @@ const AddToScheduleModal = forwardRef((props, ref) => {
   const { event, handleClose } = props;
   const [dayName, setDayName] = useState('');
   const { thisWeek } = useSelector((state) => state.events);
-  console.log(thisWeek);
   
   const handleSubmit = () => {
     dispatch(setThisWeek({ ...thisWeek, [dayName]: event }));
-    toast.success('Event added to this week\'s schedule');
+    toast.success(`${event.venue} added to ${dayName}`);
     handleClose();
   };
 
@@ -55,7 +54,7 @@ const AddToScheduleModal = forwardRef((props, ref) => {
             />
           ))}
         </RadioGroup>
-        <Button variant='contained' onClick={() => handleSubmit()}>
+        <Button variant='contained' onClick={handleSubmit}>
           Submit
         </Button>
       </FormControl>
