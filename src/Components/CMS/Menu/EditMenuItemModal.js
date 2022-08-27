@@ -52,42 +52,45 @@ const EditMenuItemModal = forwardRef(({ handleClose, menuItem }, ref) => {
         }}
       />
       <Divider />
-      <Typography id='modal-modal-title' variant='h6' component='h2'>
+      <Typography id='modal-modal-title' variant='h6' component='h2' style={{ marginBottom: '2rem' }}>
         Edit Menu Item
       </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {
-          Object.keys(menuItem).map(key => {
-            if (key === 'id' ) return null;
-            if (key === 'featured') {
+          Object.keys(menuItem)
+            .slice(0, -1)
+            .map(key => {
+              if (key === 'id' ) return null;
+              if (key === 'featured') {
+                return (
+                  <Fragment key={key}>
+                    <Box style={{ marginTop: '1rem' }}>
+                      <FormControl component='fieldset'>
+                        <FormLabel component='legend'>Featured</FormLabel>
+                        <RadioGroup row aria-label='featured' name='featured' value={menuItemObject.featured} onChange={(e) => setMenuItemObject({ ...menuItemObject, [key]: e.target.value })}>
+                          <FormControlLabel value='true' control={<Radio />} label='Yes' />
+                          <FormControlLabel value='false' control={<Radio />} label='No' />
+                        </RadioGroup>
+                      </FormControl>
+                    </Box>
+                  </Fragment>
+                );
+              }
               return (
-                <Fragment key={key}>
-                  {/** position the radio div under the last text field */}
-                  <Box >
-                    <FormControl component='fieldset'>
-                      <FormLabel component='legend'>Featured</FormLabel>
-                      <RadioGroup row aria-label='featured' name='featured' value={menuItemObject.featured} onChange={(e) => setMenuItemObject({ ...menuItemObject, [key]: e.target.value })}>
-                        <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                        <FormControlLabel value='false' control={<Radio />} label='No' />
-                      </RadioGroup>
-                    </FormControl>
-                  </Box>
-                </Fragment>
+                <TextField
+                  style={{ margin: '10px', width: '95%', maxWidth: '1000px' }}
+                  key={key}
+                  id={key}
+                  label={key}
+                  value={menuItemObject[key]}
+                  onChange={(e) => setMenuItemObject({ ...menuItemObject, [key]: e.target.value })}
+                />
               );
-            }
-            return (
-              <TextField
-                style={{ margin: '10px', width: '95%', maxWidth: '1000px' }}
-                key={key}
-                id={key}
-                label={key}
-                value={menuItemObject[key]}
-                onChange={(e) => setMenuItemObject({ ...menuItemObject, [key]: e.target.value })}
-              />
-            );
-          })
+            })
         }
-        <Button variant='contained' onClick={handleSubmit}>Submit</Button>
+        <Button variant='contained' onClick={handleSubmit} style={{ marginTop: '1rem' }}>
+          Submit
+        </Button>
       </Box>
 
     </Box>
