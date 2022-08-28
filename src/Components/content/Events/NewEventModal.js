@@ -3,17 +3,12 @@ import { useDispatch } from 'react-redux';
 import style from '../../util/modalStyle';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
 import { toast } from 'react-toastify';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
 import TextField from '@mui/material/TextField';
-import { getAll, addNew, reset } from '../../../state/features/events/eventSlice.js';
+import { getAll, addNew } from '../../../state/features/events/eventSlice.js';
 
 const NewEventModal = forwardRef(({ handleClose }, ref) => {
 
