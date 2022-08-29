@@ -38,7 +38,7 @@ const Contact = () => {
   const contactInfoForm = ['name', 'phone number', 'email', 'message'];
 
   return (
-    <div id='contact' style={{ height: '90vh', border: '2px solid green' }}>
+    <div id='contact' style={{ height: '90vh'/*, border: '2px solid green'*/ }}>
       <h1>Contact</h1>
       <div id='contact-form-container'>
         {contactInfoForm.map((field, i, arr) => (

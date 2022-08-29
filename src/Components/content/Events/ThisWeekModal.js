@@ -2,31 +2,24 @@ import { forwardRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from '../../util/modalStyle';
 import Box from '@mui/material/Box';
-// import FormControl from '@mui/material/FormControl';
-// import Button from '@mui/material/Button';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import FormLabel from '@mui/material/FormLabel';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import { getThisWeek } from '../../../state/features/events/eventSlice.js';
 
 
-const ThisWeekModal = forwardRef((props, ref) => {
+const ThisWeekModal = forwardRef(({ handleClose }, ref) => {
   const dispatch = useDispatch();
-  // console.log(props);
   const schedule = useSelector((state) => state.events.thisWeek);
 
   useEffect(() => {
     dispatch(getThisWeek());
-  } , [dispatch, schedule]);
+  }, [dispatch, schedule]);
 
-  console.log(schedule);
-  
   return (
     <Box sx={style} ref={ref} tabIndex={-1}>
       <CloseIcon
-        onClick={props.handleClose}
+        onClick={handleClose}
         style={{
           marginLeft: '95%',
           cursor: 'pointer',

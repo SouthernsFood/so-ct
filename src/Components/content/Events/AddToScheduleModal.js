@@ -13,14 +13,26 @@ import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import { setThisWeek } from '../../../state/features/events/eventSlice.js';
 import { toast } from 'react-toastify';
+import FormGroup from '@mui/material/FormGroup';
+import Checkbox from '@mui/material/Checkbox';
 
-
-const AddToScheduleModal = forwardRef((props, ref) => {
+const AddToScheduleModal = forwardRef(({ event, handleClose }, ref) => {
   const dispatch = useDispatch();
-  const { event, handleClose } = props;
   const [dayName, setDayName] = useState('');
   const { thisWeek } = useSelector((state) => state.events);
-  
+
+
+  const features = useSelector((state) => state.menu.menu).filter((item) => item.featured);
+  // console.log(features);
+
+  // const featuresChecked=[];
+  // console.log(featuresChecked);
+
+  // const handleChange = (event) => {
+  //   featuresChecked.push(event.target.value);
+  // };
+
+
   const handleSubmit = () => {
     dispatch(setThisWeek({ ...thisWeek, [dayName]: event }));
     toast.success(`${event.venue} added to ${dayName}`);
@@ -44,16 +56,36 @@ const AddToScheduleModal = forwardRef((props, ref) => {
       </Typography>
       <FormControl>
         <FormLabel>Select one</FormLabel>
-        <RadioGroup /*value={value}*/ onChange={(e) => setDayName(e.target.value)}>
+        <RadioGroup onChange={(e) => setDayName(e.target.value)}>
           {days.map((day, index) => (
             <FormControlLabel
               key={+index + `${day}`}
-              // value={day}
               control={<Radio name='day-radio' value={day} />}
               label={day}
             />
           ))}
         </RadioGroup>
+        {/* {dayName && (
+          <>
+            <Divider />
+            <FormGroup >
+              <FormLabel>Is there a Special? </FormLabel>
+
+              {features.map((feature) => (
+                <FormControlLabel onChange={handleChange} 
+                  key={feature.id.toString().replace(/\s/g, '').replace(/\//g, '')}
+                  control={<Checkbox name='feature-checkbox' value={feature.name} />}
+                  label={feature.name}
+                />
+              ))}
+              <FormControlLabel 
+                control={<Checkbox defaultChecked name='feature-checkbox' value={null} />}
+                label='None'
+              />
+            </FormGroup>
+          </>
+        )} */}
+
         <Button variant='contained' onClick={handleSubmit}>
           Submit
         </Button>

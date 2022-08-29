@@ -7,6 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import lightTheme from './themes/lightTheme.js';
 import darkTheme from './themes/darkTheme.js';
 import TopNavBar from './Components/TopNavBar';
+import BottomNav from './Components/BottomNav.js';
 import Home from './Pages/Home.js';
 import Login from './Pages/Login.js';
 import Dashboard from './Pages/Dashboard.js';
@@ -31,6 +32,7 @@ function App() {
           <Route path='*' element={<Error />} />
         </Routes>
       </div>
+      <BottomNav />
     </>
   );
   const loginContainer = (

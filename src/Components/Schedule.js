@@ -21,7 +21,7 @@ const Schedule = () => {
 
 
   return (
-    <div id='schedule' style={{ height: '91vh', border: '2px solid black' }}>
+    <div id='schedule' style={{ height: '91vh', /*border: '2px solid black'*/ }}>
       <Modal
         disableEnforceFocus
         open={open}
