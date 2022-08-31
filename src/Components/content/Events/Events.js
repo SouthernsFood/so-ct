@@ -24,6 +24,7 @@ const Events = () => {
 
   const dispatch = useDispatch();
   const { events, isLoading, isError, message } = useSelector((state) => state.events);
+  console.log(events);
   useEffect(() => {
     if (isError) {
       toast.error(message);

@@ -43,8 +43,18 @@ a[aria-current = "page"] {
   background-size: cover;
   background-position: top right;
   background-blend-mode: multiply;
-  height: 100vh;
-  margin-top: -20px;
+  height: 90vh;
+  margin-top: 10vh;
+}
+
+.hero-container {
+  /* border: solid 3px white; */
+  position: absolute;
+  left: 30%;
+  width: 45%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+  height: 30%;
 }
 
 #schedule {

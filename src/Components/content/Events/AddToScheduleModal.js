@@ -20,10 +20,10 @@ const AddToScheduleModal = forwardRef(({ event, handleClose }, ref) => {
   const dispatch = useDispatch();
   const [dayName, setDayName] = useState('');
   const { thisWeek } = useSelector((state) => state.events);
-
+  console.log(thisWeek);
 
   const features = useSelector((state) => state.menu.menu).filter((item) => item.featured);
-  // console.log(features);
+  console.log(features);
 
   // const featuresChecked=[];
   // console.log(featuresChecked);

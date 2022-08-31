@@ -11,21 +11,21 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-// import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-// import LightModeIcon from '@mui/icons-material/LightMode';
-// import { setTheme } from '../state/features/themeSlice';
-// import { useDispatch, useSelector } from 'react-redux';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { setTheme } from '../state/features/themeSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logo_southerns from '../imgs/logo_southerns.svg';
 const drawerWidth = 240;
-const navItems = ['Home', /*'About',*/ 'Schedule', 'Menu', /*'Merch',*/ 'Contact'];
+const navItems = ['Home', 'Schedule', 'Menu', 'Contact'];
 
 function TopNavBar() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const dispatch = useDispatch();
-  // const theme = useSelector((state) => state.theme.value);
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.value);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -58,7 +58,7 @@ function TopNavBar() {
 
   return (
     <Box style={{ display: 'flex' }}>
-      <AppBar component='nav' style={{ height: '8vh' }}>
+      <AppBar component='nav' style={{ height: '10vh' }}>
         <Toolbar>
           <IconButton
             color='inherit'
@@ -85,13 +85,13 @@ function TopNavBar() {
             }}
           />
           <Box
-            sx={{ display: { xs: 'none', sm: 'block' }, /*border: 'solid 1px red',*/ width: '75%',
+            sx={{ display: { xs: 'none', sm: 'block' }, width: '75%',
               position: 'relative', top: '0.25vh', left: '-1vw', textAlign: 'center' 
             }}>
             {navItems.map((item) => (
               <Button
                 key={item}
-                sx={{ color: '#fff', /*border: 'solid 1px red',*/ margin: '0.5vh 2vw', textAlign: 'center',
+                sx={{ color: '#fff', margin: '0.5vh 2vw', textAlign: 'center',
                   fontSize: '2.5vh', cursor: 'pointer'
                 }}
                 onClick={() => {
@@ -101,11 +101,11 @@ function TopNavBar() {
               </Button>
             ))}
           </Box>
-          {/* <Button
+          <Button
             color='inherit'
             onClick={() => dispatch(setTheme(theme === 'light' ? 'dark' : 'light'))}>
             {theme === 'light' ? <LightModeIcon /> : <DarkModeOutlinedIcon />}
-          </Button> */}
+          </Button>
         </Toolbar>
       </AppBar>
       <Box component='nav'>

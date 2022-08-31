@@ -26,7 +26,7 @@ const NewItemModal = forwardRef(({handleClose}, ref) => {
     allergens: '',
     featured: false,
   });
-  console.log(itemObject);
+  // console.log(itemObject);
   const handleSubmit = () => {
     try {
       dispatch(addNew(itemObject));
