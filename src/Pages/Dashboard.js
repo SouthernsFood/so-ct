@@ -1,11 +1,38 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // import Header from '../Components/content/Header.js';
 import logo_southerns from '../imgs/logo_southerns.svg';
 import Stack from '@mui/material/Stack';
 
+import { useEffect } from 'react';
+import { getAllEmails, reset } from '../state/features/mail/mailSlice.js';
+import { toast } from 'react-toastify';
+import Spinner from '../Components/Spinner.js';
+
+
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { inbox, isLoading, isError, isSuccess, message } = useSelector((state) => state.mail);
+  // const state = useSelector((state) => state.mail);
+  
+  console.log(inbox);
+
+
+
+  useEffect(() => {
+    if (!inbox.length) {
+      dispatch(getAllEmails());
+    }
+    if (isError) {
+      toast.error(message);
+    }
+    dispatch(reset());
+  }, [isError, isSuccess, message, dispatch, inbox]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div /*style={{ marginTop: '5%' }}*/>

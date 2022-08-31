@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
-import { update, getMenu, deleteItem, reset } from '../../../state/features/menu/menuSlice';
+import { updateMenuItem, getMenu, deleteMenuItem, reset } from '../../../state/features/menu/menuSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -31,8 +31,8 @@ const EditMenuItemModal = forwardRef(({ handleClose, menuItem }, ref) => {
 
   const handleSubmit = () => {
     try {
-      dispatch(update(menuItemObject));
-      toast.success('Menu item updated');
+      dispatch(updateMenuItem(menuItemObject));
+      toast.success(`${menuItemObject.name} updated`);
       dispatch(getMenu());
       handleClose();
     } catch (error) {
@@ -43,8 +43,8 @@ const EditMenuItemModal = forwardRef(({ handleClose, menuItem }, ref) => {
   const handleDelete = () => {
     try {
       if (window.confirm('Are you sure you want to delete this item?')) {
-        dispatch(deleteItem(menuItemObject));
-        toast.success('Menu item deleted');
+        dispatch(deleteMenuItem(menuItemObject));
+        toast.success(`${menuItemObject.name} was deleted`);
         dispatch(getMenu());
         handleClose();
       }

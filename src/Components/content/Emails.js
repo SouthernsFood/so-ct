@@ -1,23 +1,24 @@
-import { useEffect } from 'react';
-import Button from '@mui/material/Button';
-import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
-import { getAll, reset } from '../../state/features/mail/mailSlice.js';
-import moment from 'moment';
+import { useSelector/*, useDispatch*/ } from 'react-redux';
+// import { useEffect } from 'react';
+// // import Button from '@mui/material/Button';
+// import { toast } from 'react-toastify';
+// import { getAllEmails, reset } from '../../state/features/mail/mailSlice.js';
 import Spinner from '../../Components/Spinner.js';
+import moment from 'moment';
 import Stack from '@mui/material/Stack';
 
 const Emails = () => {
-  const dispatch = useDispatch();
-  const { inbox, isLoading, isError, isSuccess, message } = useSelector((state) => state.mail);
-  // console.log(state);
+  // const dispatch = useDispatch();
+  const { inbox, isLoading, /*isError, isSuccess, message*/ } = useSelector((state) => state.mail);
+  
 
-  useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-    dispatch(reset());
-  } , [isError, isSuccess, message, dispatch]);;
+
+  // useEffect(() => {
+  //   if (isError) {
+  //     toast.error(message);
+  //   }
+  //   dispatch(reset());
+  // } , [isError, isSuccess, message, dispatch]);;
   
   if (isLoading) {
     return <Spinner />;
@@ -26,9 +27,9 @@ const Emails = () => {
   return (
     <div>
       <h1 style={{ marginTop: '-5vh' }}>Emails</h1>
-      {!inbox.length ? (
-        <Button onClick={() => dispatch(getAll())}>Load All Incoming mail</Button>
-      ) : null}
+      {/* {!inbox.length ? (
+        <Button onClick={() => dispatch(getAllEmails())}>Load All Incoming mail</Button>
+      ) : null} */}
       {inbox.length ? (
         inbox.map((mail) => (
           <Stack

@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment, useRef } from 'react';
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getAll, reset, resetSchedule } from '../../../state/features/events/eventSlice.js';
+import { getAllEvents, reset, resetSchedule } from '../../../state/features/events/eventSlice.js';
 import Spinner from '../../Spinner.js';
 import Stack from '@mui/material/Stack';
 import EventItem from './EventItem.js';
@@ -72,7 +72,7 @@ const Events = () => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Button onClick={() => dispatch(getAll())}>
+        <Button onClick={() => dispatch(getAllEvents())}>
           show all
         </Button>
         <p>—</p>

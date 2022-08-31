@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
-import { update, getAll, setThisWeek } from '../../../state/features/events/eventSlice';
+import { updateEvents, getAllEvents, setThisWeek } from '../../../state/features/events/eventSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -31,9 +31,9 @@ const EditEvent = forwardRef(({ event, handleClose }, ref) => {
 
   const handleSubmit = () => {
     try {
-      dispatch(update(eventObject));
+      dispatch(updateEvents(eventObject));
       toast.success('Event updated');
-      dispatch(getAll());
+      dispatch(getAllEvents());
       dispatch(setThisWeek({ ...thisWeek, [day]: eventObject }));
       handleClose();
     } catch (error) { 

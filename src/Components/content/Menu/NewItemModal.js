@@ -13,7 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import TextField from '@mui/material/TextField';
-import { getMenu, reset, addNew } from '../../../state/features/menu/menuSlice';
+import { getMenu, reset, addNewMenuItem } from '../../../state/features/menu/menuSlice';
 
 
 const NewItemModal = forwardRef(({handleClose}, ref) => {
@@ -29,8 +29,8 @@ const NewItemModal = forwardRef(({handleClose}, ref) => {
   // console.log(itemObject);
   const handleSubmit = () => {
     try {
-      dispatch(addNew(itemObject));
-      toast.success('Menu item added');
+      dispatch(addNewMenuItem(itemObject));
+      toast.success(`${itemObject.name} added`);
       dispatch(getMenu());
       handleClose();
     }

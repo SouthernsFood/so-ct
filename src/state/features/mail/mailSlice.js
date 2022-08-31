@@ -10,10 +10,10 @@ const initialState = {
 };
 
 // Get all mail
-export const getAll = createAsyncThunk('mail/getAll', async (_, thunkAPI) => {
+export const getAllEmails = createAsyncThunk('mail/getAllEmails', async (_, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user.token;
-    return await mailService.getAll(token);
+    return await mailService.getAllEmails(token);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -38,16 +38,16 @@ export const mailSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAll.pending, (state) => {
+      .addCase(getAllEmails.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAll.fulfilled, (state, action) => {
+      .addCase(getAllEmails.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload.message;
         state.inbox = action.payload.contacts;
       })
-      .addCase(getAll.rejected, (state, action) => {
+      .addCase(getAllEmails.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

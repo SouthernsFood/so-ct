@@ -6,12 +6,6 @@ import { logout, reset } from '../../state/features/auth/authSlice.js';
 import { FaSignOutAlt, FaHome } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-
-// function handleClick(event) {
-//   event.preventDefault();
-//   console.info('You clicked a breadcrumb.');
-// }
-
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
-import { getAll, addNew } from '../../../state/features/events/eventSlice.js';
+import { getAllEvents, addNewEvent } from '../../../state/features/events/eventSlice.js';
 
 const NewEventModal = forwardRef(({ handleClose }, ref) => {
 
@@ -27,9 +27,9 @@ const NewEventModal = forwardRef(({ handleClose }, ref) => {
 
   const handleSubmit = () => {
     try {
-      dispatch(addNew(newEventObject));
+      dispatch(addNewEvent(newEventObject));
       toast.success('Event added');
-      dispatch(getAll());
+      dispatch(getAllEvents());
       handleClose();
     } catch (error) {
       toast.error(error.message);

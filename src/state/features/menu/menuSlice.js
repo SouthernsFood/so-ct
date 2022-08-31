@@ -25,7 +25,7 @@ export const getMenu = createAsyncThunk('menu/getMenu', async (_, thunkAPI) => {
 });
 
 // Update menu item
-export const update = createAsyncThunk('menu/update', async (menuItem, thunkAPI) => {
+export const updateMenuItem = createAsyncThunk('menu/updateMenuItem', async (menuItem, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user.token;
     return await menuService.updateMenu(token, menuItem);
@@ -39,7 +39,7 @@ export const update = createAsyncThunk('menu/update', async (menuItem, thunkAPI)
 });
 
 // Add new menu item
-export const addNew = createAsyncThunk('menu/addNew', async (menuItem, thunkAPI) => {
+export const addNewMenuItem = createAsyncThunk('menu/addNewMenuItem', async (menuItem, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user.token;
     return await menuService.addNewMenuItem(token, menuItem);
@@ -53,7 +53,7 @@ export const addNew = createAsyncThunk('menu/addNew', async (menuItem, thunkAPI)
 });
 
 // Delete menu item
-export const deleteItem = createAsyncThunk('menu/deleteItem', async (menuItem, thunkAPI) => {
+export const deleteMenuItem = createAsyncThunk('menu/deleteMenuItem', async (menuItem, thunkAPI) => {
   try {
     const token = thunkAPI.getState().auth.user.token;
     return await menuService.deleteMenuItem(token, menuItem);
@@ -94,43 +94,43 @@ const menuSlice = createSlice({
         state.message = action.payload;
         state.menu = [];
       })
-      .addCase(update.pending, (state, action) => {
+      .addCase(updateMenuItem.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(update.fulfilled, (state, action) => {
+      .addCase(updateMenuItem.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.menuItem = action.payload;
       })
-      .addCase(update.rejected, (state, action) => {
+      .addCase(updateMenuItem.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         state.menuItem = {};
       })
-      .addCase(addNew.pending, (state, action) => {
+      .addCase(addNewMenuItem.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(addNew.fulfilled, (state, action) => {
+      .addCase(addNewMenuItem.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.menuItem = action.payload;
       })
-      .addCase(addNew.rejected, (state, action) => {
+      .addCase(addNewMenuItem.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         state.menuItem = {};
       })
-      .addCase(deleteItem.pending, (state, action) => {
+      .addCase(deleteMenuItem.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(deleteItem.fulfilled, (state, action) => {
+      .addCase(deleteMenuItem.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.menuItem = action.payload;
       })
-      .addCase(deleteItem.rejected, (state, action) => {
+      .addCase(deleteMenuItem.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
